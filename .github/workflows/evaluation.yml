@@ -1,0 +1,27 @@
+name: Evaluate
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Compose
+      uses: docker/setup-buildx-action@v1
+
+    - name: Start Docker Compose
+      run: docker-compose up -d
+
+    - name: Set Target Environment Variable
+      run: echo "TARGET=${GITHUB_REF/refs\/heads\//}" >> $GITHUB_ENV
+
+    - run: echo $TARGET
+
+    - name: Run Make Evaluate
+      run: make evaluate TARGET=$TARGET
