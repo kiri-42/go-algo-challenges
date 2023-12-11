@@ -2,8 +2,8 @@ name: Evaluate
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'main'
 
 jobs:
   build-and-test:
