@@ -16,7 +16,7 @@ test:
 gpt-test:
 	$(DOCKER-EXEC) go test -count=1 -run 'Test.*ByChatGPT' /go/src/$(TARGET)
 
-check:
+evaluate:
 	make fmt
 	make lint
 	make gpt-test
