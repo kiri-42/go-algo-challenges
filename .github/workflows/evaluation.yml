@@ -19,7 +19,7 @@ jobs:
       run: docker-compose up -d
 
     - name: Set Target Environment Variable
-      run: echo "TARGET=${GITHUB_REF}" >> $GITHUB_ENV
+      run: echo "TARGET=${GITHUB_REF/refs\/heads\//}" >> $GITHUB_ENV
 
     - run: echo $TARGET
 
