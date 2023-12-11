@@ -1,0 +1,10 @@
+version: '3'
+services:
+  golang:
+    image: golang:latest
+    volumes:
+      - type: bind
+        source: "."
+        target: "/go/src"
+    tty: true
+    restart: always
