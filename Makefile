@@ -1,6 +1,12 @@
 TARGET=
 DOCKER-EXEC=docker compose exec -w /go/src/$(TARGET) golang
 
+init:
+	$(DOCKER-EXEC) go mod init
+
+use:
+	docker compose exec golang go work use $(TARGET)
+
 fix-fmt:
 	$(DOCKER-EXEC) go fmt
 
