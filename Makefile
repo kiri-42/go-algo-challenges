@@ -2,7 +2,7 @@ TARGET=
 DOCKER-EXEC=docker compose exec -w /go/src/$(TARGET) golang
 
 init:
-	$(DOCKER-EXEC) go mod init
+	$(DOCKER-EXEC) go mod init github.com/kiri-42/go-algo-challenges/$(TARGET)
 
 use:
 	docker compose exec golang go work use $(TARGET)
