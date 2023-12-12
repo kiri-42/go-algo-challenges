@@ -1,7 +1,7 @@
 version: '3'
 services:
   golang:
-    image: golang:latest
+    image: golang:1.21.3
     volumes:
       - type: bind
         source: "."
