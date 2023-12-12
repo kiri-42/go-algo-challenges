@@ -1,20 +1,26 @@
-DOCKER-EXEC=docker compose exec golang
 TARGET=
+DOCKER-EXEC=docker compose exec -w /go/src/$(TARGET) golang
+
+init:
+	$(DOCKER-EXEC) go mod init github.com/kiri-42/go-algo-challenges/$(TARGET)
+
+use:
+	docker compose exec golang go work use $(TARGET)
 
 fix-fmt:
-	$(DOCKER-EXEC) gofmt -l -w /go/src/$(TARGET)
+	$(DOCKER-EXEC) go fmt
 
 fmt:
-	! $(DOCKER-EXEC) gofmt -l /go/src/$(TARGET) | tee /dev/tty | read
+	! $(DOCKER-EXEC) gofmt -l -w . | tee /dev/tty | read
 
 lint:
-	$(DOCKER-EXEC) go vet /go/src/$(TARGET)
+	$(DOCKER-EXEC) go vet
 
 test:
-	$(DOCKER-EXEC) go test -count=1 /go/src/$(TARGET)
+	$(DOCKER-EXEC) go test -count=1
 
 gpt-test:
-	$(DOCKER-EXEC) go test -count=1 -run 'Test.*ByChatGPT' /go/src/$(TARGET)
+	$(DOCKER-EXEC) go test -count=1 -run 'Test.*ByChatGPT'
 
 evaluate:
 	make fmt
