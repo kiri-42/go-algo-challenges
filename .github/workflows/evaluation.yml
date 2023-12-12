@@ -21,7 +21,5 @@ jobs:
     - name: Set Target Environment Variable
       run: echo "TARGET=${GITHUB_REF/refs\/heads\//}" >> $GITHUB_ENV
 
-    - run: echo $TARGET
-
     - name: Run Make Evaluate
       run: make evaluate TARGET=$TARGET
