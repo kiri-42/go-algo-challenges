@@ -2,8 +2,13 @@ TARGET=
 DOCKER-EXEC=docker compose exec -w /go/src/$(TARGET) golang
 
 init:
+	mkdir $(TARGET)
 	$(DOCKER-EXEC) go mod init github.com/kiri-42/go-algo-challenges/$(TARGET)
 	docker compose exec golang go work use $(TARGET)
+	touch $(TARGET)/question.md $(TARGET)/submit.go $(TARGET)/submit_test.go
+
+solution:
+	touch $(TARGET)/evaluation_test.go $(TARGET)/solution.md
 
 fix-fmt:
 	$(DOCKER-EXEC) go fmt
